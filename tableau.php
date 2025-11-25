@@ -2,8 +2,14 @@
 session_start();
 require "fonctions.php";
 requireLogin();
-$pdo = getBD();
+$pdo = getDB();
 $user = getUserById($pdo,$_SESSION['user_id']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_account'])) {
+    deleteAccount($pdo, $_SESSION['user_id']);
+    session_destroy();
+    header("Location: register.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,14 +28,23 @@ $user = getUserById($pdo,$_SESSION['user_id']);
         <nav class="nav-links">
             <a href="index.html">Accueil</a>
             <a href="logout.php">Déconnexion</a>
+<?php if ($_SESSION['role_name'] === 'admin'): ?>
+    <div class="admin-btn">
+        <a href="admin.php" class="btn"> Accès Administrateur </a>
+    </div>
+<?php endif; ?>
         </nav>
+        <form method="POST" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer votre compte ? Vous ne pourrez pas retrouver vos données.');">
+                <input type="hidden" name="delete_account" value="1">
+                <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+           </form>
     </header>
 
     <main class="page">
         <div class="grid-two">
             <section class="hero">
                 <div class="eyebrow">Bienvenue</div>
-                <p>Statut de compte : <?php echo htmlspecialchars($user['role']); ?> </p>
+                <p>Statut de compte : <?php echo htmlspecialchars($user['role_name']); ?> </p>
             </section>
 
             <section class="card">

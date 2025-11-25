@@ -42,10 +42,10 @@ function emailExiste($pdo, $email) {
 // ---------------------------------------
 // Inscrire un utilisateur
 // ---------------------------------------
-function creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role = 'user') {
-    $sql = "INSERT INTO users (nom, email, password, adresse, role) VALUES (?, ?, ?, ?, ?)";
+function creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role_id = 1) {
+    $sql = "INSERT INTO users (nom, email, password, adresse, role_id) VALUES (?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    return $stmt->execute([$nom, $email, $passwordHash, $adresse, $role]);
+    return $stmt->execute([$nom, $email, $passwordHash, $adresse, $role_id]);
 }
 
 
@@ -54,7 +54,7 @@ function creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role = '
 // Récupérer un utilisateur par email
 // ---------------------------------------
 function getUserByEmail($pdo, $email) {
-    $sql = "SELECT users.*, roles.role_name FROM users JOIN role ON users.rike_id = roles.id WHERE email = ?";
+    $sql = "SELECT users.*, role.role_name FROM users JOIN role ON users.role_id = role.id WHERE email = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
     return $stmt->fetch(PDO :: FETCH_ASSOC);
@@ -64,7 +64,7 @@ function getUserByEmail($pdo, $email) {
 // Récupérer les rôles de l'utilisateur
 // ---------------------------------------
 function getAllUsers($pdo) {
-    $sql = "SELECT users.id, users.nom, users.email, roles.role_name FROM users JOIN roles On users.role_id = roles.id";
+    $sql = "SELECT users.id, users.nom, users.email, role.role_name FROM users JOIN role On users.role_id = role.id";
     $stmt = $pdo->query($sql);
     return $stmt->fetchAll(PDO :: FETCH_ASSOC);
 }
@@ -102,10 +102,12 @@ function deleteAccount($pdo, $id){
 // Récupérer un utilisateur avec un ID
 // ---------------------------------------
 function getUserById($pdo, $id) {
-    $sql = "SELECT * FROM users WHERE id = ?";
+    $sql = "SELECT users.*, role.role_name FROM users JOIN role ON users.role_id = role.id WHERE users.id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
-    return $fetch(PDO :: FETCH_SSOC);
+    return $stmt->fetch(PDO :: FETCH_ASSOC);
 }
+
+
 
 ?>

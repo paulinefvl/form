@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse = trim($_POST['adresse']);
     $password = trim($_POST['password']);
     $passwordConfirm = trim($_POST['password_confirm']);
-    $role = 'user';
+    $role_id = 1;
 
     if ($nom === "" || $email === "" || $adresse === "" || $password === "" || $passwordConfirm === "") {
         die("Tous les champs sont obligatoires.");
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    if (creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role)) {
+    if (creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role_id)) {
         echo "Inscription réussie. <a href='login.php'>Se connecter</a>";
     } else {
         echo "Erreur lors de l'inscription.";

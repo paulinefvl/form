@@ -1,18 +1,19 @@
 <?php
 session_start();
+require "fonctions.php";
 
-if (isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['role_name']) || $_SESSION['role_name'] !== 'admin') {
     die('Accès refusé.');
 }
 
 $pdo = getDB();
-require "fonctions.php";
 $users = getAllUsers($pdo);
 ?>
 
 <!DOCTYPE html>
 <html>
 <body>
+    <p><a href="tableau.php">Retour à mon compte</a></p>
     <h1> — Accès ADMINISTRATEUR </h1>
 
     <table border="1">
@@ -22,6 +23,7 @@ $users = getAllUsers($pdo);
             <th> EMAIL </th>
             <th> ROLE </th>
             <th> CHANGER DE ROLE </th>
+            <th> SUPPRIMER </th>
         </tr>
 
         <?php foreach ($users as $u): ?>
@@ -31,13 +33,19 @@ $users = getAllUsers($pdo);
             <td> <?= $u['email'] ?></td>
             <td> <?= $u['role_name'] ?></td>
             <td>
-                <form method="POST" action="opdate_role.php">
+                <form method="POST" action="update_role.php">
                     <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                     <select name="role_id">
                         <option value="1"> USER </option>
                         <option value="2"> ADMINISTRATEUR </option>
                     </select>
                     <button type="submit"> Modifier </button>
+                </form>
+            </td>
+            <td> 
+                <form method="POST" action="delete_user.php" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer ce compte ? Les données seront perdues.');">
+                    <input type="hidden" name="user_id" value="<?=$u['id'] ?>">
+                    <button type="submit" class="btn btn-danger">Supprimer le compte</button>
                 </form>
             </td>
         </tr>
