@@ -51,6 +51,29 @@ $users = getAllUsers($pdo);
         </tr>
         <?php endforeach; ?>
     </table>
+<h2>Ajouter un utilisateur</h2>
+
+<form method="POST" action="add_user.php">
+    <label>Nom :</label>
+    <input type="text" name="nom" required>
+<br>
+    <label>Email :</label>
+    <input type="email" name="email" required>
+<br>
+    <label>Adresse :</label>
+    <input type="text" name="adresse" required>
+<br>
+    <label>Mot de passe :</label>
+    <input type="password" name="password" required>
+<br>
+    <label>Rôle :</label>
+    <select name="role_id">
+        <option value="1">Utilisateur</option>
+        <option value="2">Administrateur</option>
+    </select>
+<br>
+    <button type="submit">Créer l'utilisateur</button>
+</form>
 
 </body>
 </html>
