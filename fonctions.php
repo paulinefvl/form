@@ -98,5 +98,14 @@ function deleteAccount($pdo, $id){
     $stmt->execute([$id]);
 }
 
+// ---------------------------------------
+// Récupérer un utilisateur avec un ID
+// ---------------------------------------
+function getUserById($pdo, $id) {
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$id]);
+    return $fetch(PDO :: FETCH_SSOC);
+}
 
 ?>

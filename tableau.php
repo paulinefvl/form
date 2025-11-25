@@ -2,6 +2,8 @@
 session_start();
 require "fonctions.php";
 requireLogin();
+$pdo = getBD();
+$user = getUserById($pdo,$_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ requireLogin();
         <div class="grid-two">
             <section class="hero">
                 <div class="eyebrow">Bienvenue</div>
-                <p>Statut de compte : <?php echo htmlspecialchars($_SESSION['']); ?> </p>
+                <p>Statut de compte : <?php echo htmlspecialchars($user['role']); ?> </p>
             </section>
 
             <section class="card">
@@ -36,8 +38,11 @@ requireLogin();
                     <table>
                         <tr>
                             <th>Nom d'utilisateur</th>
-                            <td><?php echo htmlspecialchars($_SESSION['user_nom']); ?></td>
-                            <th></th>
+                            <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                            <th>Email utilisé</th>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <th>Adresse postale</th>
+                            <td><?php echo htmlspecialchars($user['adresse']); ?></td>
                         </tr>
                     </table>
                 </div>
