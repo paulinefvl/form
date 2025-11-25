@@ -60,6 +60,15 @@ function getUserByEmail($pdo, $email) {
     return $stmt->fetch(PDO :: FETCH_ASSOC);
 }
 
+// ---------------------------------------
+// Récupérer les rôles de l'utilisateur
+// ---------------------------------------
+function getAllUsers($pdo) {
+    $sql = "SELECT users.id, users.nom, users.email, roles.role_name FROM users JOIN roles On users.role_id = roles.id";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO :: FETCH_ASSOC);
+}
+
 
 
 // ---------------------------------------
@@ -88,5 +97,6 @@ function deleteAccount($pdo, $id){
 	$stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
     $stmt->execute([$id]);
 }
+
 
 ?>

@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse = trim($_POST['adresse']);
     $password = trim($_POST['password']);
     $passwordConfirm = trim($_POST['password_confirm']);
+    $role = 'user';
 
     if ($nom === "" || $email === "" || $adresse === "" || $password === "" || $passwordConfirm === "") {
         die("Tous les champs sont obligatoires.");
