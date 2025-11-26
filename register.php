@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse = trim($_POST['adresse']);
     $password = trim($_POST['password']);
     $passwordConfirm = trim($_POST['password_confirm']);
+    $pattern = "/^(?=.[A-Za-z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{12,}$/";
     $role_id = 1;
 
     if ($nom === "" || $email === "" || $adresse === "" || $password === "" || $passwordConfirm === "") {
