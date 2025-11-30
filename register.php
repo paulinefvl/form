@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     if (creerUtilisateur($pdo, $nom, $email, $passwordHash, $adresse, $role_id)) {
-        echo "Inscription réussie. <a href='login.php'>Se connecter</a>";
+        echo "<p class='success-message'>Inscription réussie. <a href='login.php'>Se connecter</a></p>";
+
     } else {
         echo "Erreur lors de l'inscription.";
     }
@@ -44,8 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
-    <link rel="stylesheet" href="style.css">
+    <title>I= Page d'inscription </title>
+    <link rel="stylesheet" href="assets/css/style_register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="nebula-dot" style="left: 10%; top: 15%;"></div>
@@ -53,41 +57,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <header class="topbar">
         <div class="brand">
-            <span class="orb"></span>
             <span>Welcome</span>
         </div>
         <nav class="nav-links">
             <a href="index.html">Accueil</a>
-            <a href="register.php">Inscription</a>
             <a href="login.php">Connexion</a>
         </nav>
     </header>
 
     <main class="page">
         <div class="grid-two">
-
             <section class="card">
-                <h3>Créer un compte</h3>
+                <h3 class="titre">Créer un compte</h3>
                 <form method="POST">
                     <div class="field">
-                        <label for="nom">Nom</label>
-                        <input id="nom" type="text" name="nom" required>
+                        <label>Nom : </label>
+                        <input type="text" name="nom" required>
                     </div>
                     <div class="field">
-                        <label for="email">Email</label>
-                        <input id="email" type="email" name="email" required>
+                        <label>Email : </label>
+                        <input type="email" name="email" required>
                     </div>
                     <div class="field">
-                        <label for="adresse">Adresse physique</label>
-                        <input id="adresse" type="text" name="adresse" placeholder="N° et rue, ville" required>
+                        <label>Adresse physique : </label>
+                        <input type="text" name="adresse" placeholder="N° et rue, ville" required>
                     </div>
                     <div class="field">
-                        <label for="password">Mot de passe</label>
-                        <input id="password" type="password" name="password" required>
+                        <label>Mot de passe : </label>
+                        <input type="password" name="password" required>
                     </div>
                     <div class="field">
-                        <label for="password_confirm">Confirmer le mot de passe</label>
-                        <input id="password_confirm" type="password" name="password_confirm" required>
+                        <label>Confirmer le mot de passe : </label>
+                        <input type="password" name="password_confirm" required>
                     </div>
                     <div class="actions">
                         <button class="btn" type="submit">S'inscrire</button>

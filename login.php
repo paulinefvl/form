@@ -37,27 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion </title>
-    <link rel="stylesheet" href="style.css">
+    <title> Ecran de connexion </title>
+    <link rel="stylesheet" href="assets/css/style_login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="nebula-dot" style="left: 6%; top: 22%;"></div>
-    <div class="nebula-dot secondary" style="right: 12%; bottom: 16%;"></div>
-
     <header class="topbar">
         <div class="brand">
         </div>
         <nav class="nav-links">
             <a href="index.html">Accueil</a>
             <a href="register.php">Inscription</a>
-            <a href="login.php">Connexion</a>
         </nav>
     </header>
 
     <main class="page">
-        <div class="grid-two">
-            <section class="card">
-                <h3>Accéder au compte</h3>
+        <h3 class=titre>Accéder au compte</h3>
+        <section class="card">
+            <div class="grid-two">
                 <form method="POST">
                     <div class="field">
                         <label for="email">Email</label>
@@ -72,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <a class="inline-link" href="register.php">Créer un compte</a>
                     </div>
                 </form>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>

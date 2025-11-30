@@ -1,0 +1,71 @@
+:root{
+    /*Couleurs brand*/
+    --fond:#0B0E14;
+    --fond-secondaire:#141926;
+    --fond-tertiaires: #1E2636;
+    --titre: #d4af37;
+    --titre-secondaire: #8faadc;
+    --texte-principal: #e6e3ee;
+    --texte-discret: #a1a7b3;
+    --message-erreur:red;
+    --message-succes:green ;
+    --message-avertissement: #e74c3c ;
+}
+
+/* Normalizer */
+*{
+    margin: 3px;
+    padding: 3px;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    background-color: var(--fond);
+    font-size: clamp(1rem,2vw,1.4rem);
+}
+
+header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.first-title {
+    text-align: center;
+    color: var(--titre);
+}
+
+.second-title {
+    text-align: right;
+    color: var(--titre);
+    margin-right: 20px;
+}
+
+.grid-two {
+    display: flex;
+    gap: 5px;
+}
+
+.div1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 6px 0;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+    color: var(--titre-secondaire)
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--titre-secondaire);
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--titre);
+}
+
+p {
+    display: flex;
+    color: var(--texte-principal)
+}

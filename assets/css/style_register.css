@@ -1,0 +1,135 @@
+    /*Couleurs brand*/
+:root{
+    --fond:#0B0E14;
+    --fond-secondaire:#141926;
+    --fond-tertiaires: #1E2636;
+    --titre: #d4af37;
+    --titre-secondaire: #8faadc;
+    --texte-principal: #e6e3ee;
+    --texte-discret: #a1a7b3;
+    --message-erreur:red;
+    --message-succes:green ;
+    --message-avertissement: #e74c3c ;
+}
+
+    /* Normalizer */
+*{
+    margin: 3px;
+    padding: 3px;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    background-color: var(--fond);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+header {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--titre);
+    
+}
+
+nav {
+    margin: 6px 0px 0px 75px;
+    justify-content: left;
+    padding: 1px;
+    width: 80%;
+    color: var(--titre-secondaire)
+}
+
+a {
+    font-size: 18px;
+    text-decoration: none;
+    
+    color: var(--titre-secondaire);
+}
+
+a:hover {
+    color: var(--titre);
+}
+
+.titre {
+    display: flex;
+    justify-content: left;
+    
+    margin-left: 75px;
+    
+    color: var(--titre-secondaire);
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--texte-discret);
+    background-color: var(--fond-tertiaires);
+
+    width: fit-content;
+    border-radius: 8px;
+    padding: 4px 8px;
+    height: 50px;
+    
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.field input {
+    width: 220px;
+    height: 34px;
+    
+    padding: 6px 12px;
+    font-size: 1rem;
+    
+    border-radius: 5px;
+}
+
+
+.field label {
+    background-color: var(--fond-tertiaires);
+    
+    font-size: 1.1rem;
+    
+    line-height: 1.2;
+}
+
+input, textarea, select {
+    background-color: var(--fond-secondaire);
+    color: var(--texte-principal);
+    border: 1px solid var(--titre-secondaire);
+
+    padding: 4px 12px;
+    border-radius: 6px;
+    outline: none;
+}
+
+.btn {
+    background-color: var(--fond-secondaire);
+    color: var(--texte-principal);
+    border: 1px solid var(--titre-secondaire);
+
+    font-size: 1rem;
+    padding: 6px 14px;
+    height: 40px;
+    margin-top: 10px;
+
+    border-radius: 5px;
+    outline: none;
+}
+
+.success-message {
+    color: var(--message-succes);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.success-message a {
+    color: var(--titre);
+    text-decoration: underline;
+}

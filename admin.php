@@ -11,10 +11,19 @@ $users = getAllUsers($pdo);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin page </title>
+    <link rel="stylesheet" href="assets/css/style_admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
 <body>
-    <p><a href="tableau.php">Retour à mon compte</a></p>
-    <h1> — Accès ADMINISTRATEUR </h1>
+    <p class="titre1"><a href="tableau.php">Retour à mon compte</a></p>
+    <h1 class="titre"> — Accès ADMINISTRATEUR </h1>
 
     <table border="1">
         <tr>
@@ -39,40 +48,45 @@ $users = getAllUsers($pdo);
                         <option value="1"> USER </option>
                         <option value="2"> ADMINISTRATEUR </option>
                     </select>
-                    <button type="submit"> Modifier </button>
+                    <button type="submit" class="btn"> Modifier </button>
                 </form>
             </td>
             <td> 
                 <form method="POST" action="delete_user.php" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer ce compte ? Les données seront perdues.');">
                     <input type="hidden" name="user_id" value="<?=$u['id'] ?>">
-                    <button type="submit" class="btn btn-danger">Supprimer le compte</button>
+                    <button type="submit" class="suppr">Supprimer le compte</button>
                 </form>
             </td>
         </tr>
         <?php endforeach; ?>
     </table>
-<h2>Ajouter un utilisateur</h2>
+<h2 class="titre1">Ajouter un utilisateur</h2>
 
 <form method="POST" action="add_user.php">
-    <label>Nom :</label>
-    <input type="text" name="nom" required>
-<br>
-    <label>Email :</label>
-    <input type="email" name="email" required>
-<br>
-    <label>Adresse :</label>
-    <input type="text" name="adresse" required>
-<br>
-    <label>Mot de passe :</label>
-    <input type="password" name="password" required>
-<br>
-    <label>Rôle :</label>
-    <select name="role_id">
-        <option value="1">Utilisateur</option>
-        <option value="2">Administrateur</option>
-    </select>
-<br>
-    <button type="submit">Créer l'utilisateur</button>
+    <div class=field>
+        <label>Nom :</label>
+        <input type="text" name="nom" required>
+    </div>
+    <div class=field>
+        <label>Email :</label>
+        <input type="email" name="email" required>
+    </div>
+    <div class=field>
+        <label>Adresse :</label>
+        <input type="text" name="adresse" required>
+    </div>
+    <div class=field>
+        <label>Mot de passe :</label>
+        <input type="password" name="password" required>
+    </div>
+    <div class=field>
+        <label>Rôle :</label>
+        <select name="role_id">
+            <option value="1">Utilisateur</option>
+            <option value="2">Administrateur</option>
+        </select>
+    </div>
+    <button type="submit" class="btn">Créer l'utilisateur</button>
 </form>
 
 </body>
