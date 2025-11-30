@@ -22,9 +22,23 @@ $users = getAllUsers($pdo);
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p class="titre1"><a href="tableau.php">Retour à mon compte</a></p>
-    <h1 class="titre"> — Accès ADMINISTRATEUR </h1>
+    <header class="topbar">
+        <div class="brand">
+            <span> Welcome </span>
+        </div>
+        <input type="checkbox" id="burger-toggle">
+        <label for="burger-toggle" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-links">
+        <a href="tableau.php">Retour à mon compte</a>
+        </nav>
+    </header>
 
+<main>
+    <h1 class="titre"> — Accès ADMINISTRATEUR </h1>
     <table border="1">
         <tr>
             <th> ID </th>
@@ -93,6 +107,7 @@ $users = getAllUsers($pdo);
     </div>
     <button type="submit" class="btn">Créer l'utilisateur</button>
 </form>
+</main>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {

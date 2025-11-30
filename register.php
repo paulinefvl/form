@@ -53,13 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <div class="nebula-dot" style="left: 10%; top: 15%;"></div>
-    <div class="nebula-dot secondary" style="right: 8%; bottom: 22%;"></div>
 
     <header class="topbar">
         <div class="brand">
-            <span>Welcome</span>
+            <span> Welcome </span>
         </div>
+        <input type="checkbox" id="burger-toggle">
+        <label for="burger-toggle" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         <nav class="nav-links">
             <a href="index.html">Accueil</a>
             <a href="login.php">Connexion</a>
