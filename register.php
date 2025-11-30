@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="nebula-dot" style="left: 10%; top: 15%;"></div>
     <div class="nebula-dot secondary" style="right: 8%; bottom: 22%;"></div>
@@ -74,22 +75,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>Nom : </label>
                         <input type="text" name="nom" required>
                     </div>
+
                     <div class="field">
                         <label>Email : </label>
                         <input type="email" name="email" required>
                     </div>
+
                     <div class="field">
                         <label>Adresse physique : </label>
-                        <input type="text" name="adresse" placeholder="N° et rue, ville" required>
+                        <input type="text" 
+                        id="addressInput" 
+                        name="adresse" 
+                        placeholder="Commencez à taper votre adresse..." 
+                        autocomplete="off" required>
+                        <ul id="suggestions"></ul>
                     </div>
+
                     <div class="field">
                         <label>Mot de passe : </label>
                         <input type="password" name="password" required>
                     </div>
+
                     <div class="field">
                         <label>Confirmer le mot de passe : </label>
                         <input type="password" name="password_confirm" required>
                     </div>
+
                     <div class="actions">
                         <button class="btn" type="submit">S'inscrire</button>
                         <a class="inline-link" href="login.php">Déjà membre ?</a>
@@ -98,5 +109,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </section>
         </div>
     </main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const input = document.getElementById("addressInput");
+  const suggestions = document.getElementById("suggestions");
+
+  if (!input || !suggestions) {
+    console.error("❌ Input ou suggestions introuvables");
+    alert("❌ Input ou suggestions introuvables");
+    return;
+  } else {
+    console.log("✅ Input détecté");
+  }
+
+  input.addEventListener("input", async () => {
+    const query = input.value.trim();
+
+    if (query.length < 3) {
+      suggestions.innerHTML = "";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`
+      );
+      const data = await response.json();
+
+      suggestions.innerHTML = "";
+
+      data.features.forEach(feature => {
+        const li = document.createElement("li");
+        li.textContent = feature.properties.label;
+
+        li.onclick = () => {
+          input.value = feature.properties.label;
+          suggestions.innerHTML = "";
+        };
+
+        suggestions.appendChild(li);
+      });
+
+    } catch (err) {
+      console.error("❌ API erreur :", err);
+    }
+  });
+
+});
+</script>
 </body>
 </html>

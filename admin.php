@@ -71,9 +71,14 @@ $users = getAllUsers($pdo);
         <label>Email :</label>
         <input type="email" name="email" required>
     </div>
-    <div class=field>
-        <label>Adresse :</label>
-        <input type="text" name="adresse" required>
+    <div class="field">
+        <label>Adresse physique : </label>
+        <input type="text" 
+        id="addressInput" 
+        name="adresse" 
+        placeholder="Commencez à taper votre adresse..." 
+        autocomplete="off" required>
+        <ul id="suggestions"></ul>
     </div>
     <div class=field>
         <label>Mot de passe :</label>
@@ -88,6 +93,56 @@ $users = getAllUsers($pdo);
     </div>
     <button type="submit" class="btn">Créer l'utilisateur</button>
 </form>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const input = document.getElementById("addressInput");
+  const suggestions = document.getElementById("suggestions");
+
+  if (!input || !suggestions) {
+    console.error("❌ Input ou suggestions introuvables");
+    alert("❌ Input ou suggestions introuvables");
+    return;
+  } else {
+    console.log("✅ Input détecté");
+  }
+
+  input.addEventListener("input", async () => {
+    const query = input.value.trim();
+
+    if (query.length < 3) {
+      suggestions.innerHTML = "";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`
+      );
+      const data = await response.json();
+
+      suggestions.innerHTML = "";
+
+      data.features.forEach(feature => {
+        const li = document.createElement("li");
+        li.textContent = feature.properties.label;
+
+        li.onclick = () => {
+          input.value = feature.properties.label;
+          suggestions.innerHTML = "";
+        };
+
+        suggestions.appendChild(li);
+      });
+
+    } catch (err) {
+      console.error("❌ API erreur :", err);
+    }
+  });
+
+});
+</script>
 
 </body>
 </html>
